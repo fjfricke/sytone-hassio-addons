@@ -5,14 +5,13 @@ FROM $BUILD_FROM
 ENV LANG C.UTF-8
 
 # Setup base
-RUN apk add --no-cache git nodejs nodejs-npm curl wget unzip \
-    && npm set unsafe-perm true \
+RUN apk add --no-cache git nodejs npm curl wget unzip \
     && npm i npm@latest -g 
 
 WORKDIR /opt/magic_mirror
 
 RUN git clone --depth 1 -b master https://github.com/MichMich/MagicMirror.git . \
-  && npm install --unsafe-perm
+  && npm install
 
 # Copy data
 COPY run.sh /
